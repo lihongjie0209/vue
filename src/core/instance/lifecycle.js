@@ -165,6 +165,7 @@ export function mountComponent (
       }
     }
   }
+  // 调用生命周期函数
   callHook(vm, 'beforeMount')
 
   let updateComponent
@@ -192,6 +193,7 @@ export function mountComponent (
     }
   }
 
+  // 初始化一个观察者用于刷新vm的数据
   // we set this to vm._watcher inside the watcher's constructor
   // since the watcher's initial patch may call $forceUpdate (e.g. inside child
   // component's mounted hook), which relies on vm._watcher being already defined
@@ -208,7 +210,7 @@ export function mountComponent (
   // mounted is called for render-created child components in its inserted hook
   if (vm.$vnode == null) {
     vm._isMounted = true
-    callHook(vm, 'mounted')
+    callHook(vm, 'mounted') // 挂载完毕
   }
   return vm
 }

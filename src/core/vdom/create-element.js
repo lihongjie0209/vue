@@ -90,13 +90,13 @@ export function _createElement (
   if (normalizationType === ALWAYS_NORMALIZE) {
     children = normalizeChildren(children)
   } else if (normalizationType === SIMPLE_NORMALIZE) {
-    children = simpleNormalizeChildren(children)
+    children = simpleNormalizeChildren(children) // 嵌套数组展开
   }
   let vnode, ns
-  if (typeof tag === 'string') {
+  if (typeof tag === 'string') { // 如果是 string 类型
     let Ctor
     ns = (context.$vnode && context.$vnode.ns) || config.getTagNamespace(tag)
-    if (config.isReservedTag(tag)) {
+    if (config.isReservedTag(tag)) { // html 标签
       // platform built-in elements
       if (process.env.NODE_ENV !== 'production' && isDef(data) && isDef(data.nativeOn)) {
         warn(
@@ -108,10 +108,10 @@ export function _createElement (
         config.parsePlatformTagName(tag), data, children,
         undefined, undefined, context
       )
-    } else if ((!data || !data.pre) && isDef(Ctor = resolveAsset(context.$options, 'components', tag))) {
+    } else if ((!data || !data.pre) && isDef(Ctor = resolveAsset(context.$options, 'components', tag))) { // 如果是一个组件
       // component
       vnode = createComponent(Ctor, data, context, children, tag)
-    } else {
+    } else { // 如果都不是
       // unknown or unlisted namespaced elements
       // check at runtime because it may get assigned a namespace when its
       // parent normalizes children
