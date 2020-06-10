@@ -44,6 +44,16 @@ export function createElement (
   return _createElement(context, tag, data, children, normalizationType)
 }
 
+/**
+ * vnode 工厂方法
+ * @param context
+ * @param tag
+ * @param data
+ * @param children
+ * @param normalizationType
+ * @returns {*|VNode}
+ * @private
+ */
 export function _createElement (
   context: Component,
   tag?: string | Class<Component> | Function | Object,
