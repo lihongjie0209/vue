@@ -35,6 +35,13 @@ const sharedPropertyDefinition = {
   set: noop
 }
 
+/**
+ * 创建一个代理, 当你访问 this.name 时,
+ * 内部实际访问的是 this._data.name
+ * @param target
+ * @param sourceKey
+ * @param key
+ */
 export function proxy (target: Object, sourceKey: string, key: string) {
   sharedPropertyDefinition.get = function proxyGetter () {
     return this[sourceKey][key]
@@ -45,6 +52,10 @@ export function proxy (target: Object, sourceKey: string, key: string) {
   Object.defineProperty(target, key, sharedPropertyDefinition)
 }
 
+/**
+ * 初始化对象
+ * @param vm
+ */
 export function initState (vm: Component) {
   vm._watchers = []
   const opts = vm.$options
@@ -283,6 +294,7 @@ function initMethods (vm: Component, methods: Object) {
         )
       }
     }
+    // 创建一个新的函数, 这个函数的this 指向当前的组件
     vm[key] = typeof methods[key] !== 'function' ? noop : bind(methods[key], vm)
   }
 }

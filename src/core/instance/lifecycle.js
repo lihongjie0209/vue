@@ -38,12 +38,13 @@ export function initLifecycle (vm: Component) {
     while (parent.$options.abstract && parent.$parent) {
       parent = parent.$parent
     }
-    parent.$children.push(vm)
+    parent.$children.push(vm) // 把当前的组件添加到父组件中去
   }
 
-  vm.$parent = parent
-  vm.$root = parent ? parent.$root : vm
+  vm.$parent = parent // 子组件指向父组件
+  vm.$root = parent ? parent.$root : vm // 如果有父组件, 那么root为父组件的root, 如果没有父组件, 那么当前组件就是root组件
 
+  // 初始化内部的数据
   vm.$children = []
   vm.$refs = {}
 
@@ -336,10 +337,10 @@ export function deactivateChildComponent (vm: Component, direct?: boolean) {
 export function callHook (vm: Component, hook: string) {
   // #7573 disable dep collection when invoking lifecycle hooks
   pushTarget()
-  const handlers = vm.$options[hook]
+  const handlers = vm.$options[hook] // 拿到生命周期函数
   const info = `${hook} hook`
   if (handlers) {
-    for (let i = 0, j = handlers.length; i < j; i++) {
+    for (let i = 0, j = handlers.length; i < j; i++) { // 然后调用
       invokeWithErrorHandling(handlers[i], vm, null, vm, info)
     }
   }

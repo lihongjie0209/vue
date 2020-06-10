@@ -130,6 +130,7 @@ export function observe (value: any, asRootData: ?boolean): Observer | void {
 }
 
 /**
+ * 动态代理一个对象的属性
  * Define a reactive property on an Object.
  */
 export function defineReactive (

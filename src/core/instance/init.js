@@ -11,12 +11,12 @@ import { initProvide, initInjections } from './inject'
 import { extend, mergeOptions, formatComponentName } from '../util/index'
 
 let uid = 0
-
+// 组件初始化方法
 export function initMixin (Vue: Class<Component>) {
   Vue.prototype._init = function (options?: Object) {
     const vm: Component = this
     // a uid
-    vm._uid = uid++
+    vm._uid = uid++ // 获取一个自增ID
 
     let startTag, endTag
     /* istanbul ignore if */
@@ -27,7 +27,7 @@ export function initMixin (Vue: Class<Component>) {
     }
 
     // a flag to avoid this being observed
-    vm._isVue = true
+    vm._isVue = true // 标记一下
     // merge options
     if (options && options._isComponent) {
       // optimize internal component instantiation
