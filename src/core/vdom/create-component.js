@@ -112,8 +112,8 @@ export function createComponent (
   const baseCtor = context.$options._base
 
   // plain options object: turn it into a constructor
-  if (isObject(Ctor)) {
-    Ctor = baseCtor.extend(Ctor)
+  if (isObject(Ctor)) { // 如果传入一个对象, 那么我们认为这是Vue的配置对象
+    Ctor = baseCtor.extend(Ctor) // 创建一个新的构造函数, 集成父类, 同时合并这些配置
   }
 
   // if at this stage it's not a constructor or an async component factory,

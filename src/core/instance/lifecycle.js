@@ -140,17 +140,17 @@ export function lifecycleMixin (Vue: Class<Component>) {
 }
 
 export function mountComponent (
-  vm: Component,
-  el: ?Element,
-  hydrating?: boolean
+  vm: Component, // vnode
+  el: ?Element, // dom节点
+  hydrating?: boolean // 标志位
 ): Component {
   vm.$el = el
-  if (!vm.$options.render) {
-    vm.$options.render = createEmptyVNode
+  if (!vm.$options.render) { // 没有render函数
+    vm.$options.render = createEmptyVNode // 创建一个默认的
     if (process.env.NODE_ENV !== 'production') {
       /* istanbul ignore if */
       if ((vm.$options.template && vm.$options.template.charAt(0) !== '#') ||
-        vm.$options.el || el) {
+        vm.$options.el || el) { // 有template 但是没有render函数, 说明没有被编译
         warn(
           'You are using the runtime-only build of Vue where the template ' +
           'compiler is not available. Either pre-compile the templates into ' +

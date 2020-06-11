@@ -160,8 +160,8 @@ export function defineReactive (
     configurable: true,
     get: function reactiveGetter () {
       const value = getter ? getter.call(obj) : val
-      if (Dep.target) {
-        dep.depend()
+      if (Dep.target) { // 如果依赖有绑定watcher
+        dep.depend() // 把当前依赖添加到 watcher 中
         if (childOb) {
           childOb.dep.depend()
           if (Array.isArray(value)) {
@@ -189,7 +189,7 @@ export function defineReactive (
         val = newVal
       }
       childOb = !shallow && observe(newVal)
-      dep.notify()
+      dep.notify() // 调用关联的watcher
     }
   })
 }
